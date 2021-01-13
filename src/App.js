@@ -132,7 +132,7 @@ function Posts( { posts } ) {
 
 function Post(props) {
   const { data } = props;
-  return(
+  return data == undefined ? <h1>404 post not found!</h1> : (
     <Card>
       <Card.Header>{data.title}</Card.Header>
       <Card.Body>
