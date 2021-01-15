@@ -60,7 +60,7 @@ export default function App() {
               <Posts posts={posts} />
             </Route>
             <Route path='/friends'>
-              <Friends names={['Person 1', 'Person 2', 'Person 3']} />
+              <Friends names={['User 1', 'User 2', 'User 3']} />
             </Route>
             <Route path='/'>
               <Home />
@@ -73,18 +73,18 @@ export default function App() {
 }
 
 function Home() {
-
+  return <h2>Home</h2>
 }
 
 function Friends(props) {
-  const {names} =  props;
+  const { names } = props;
 
   return(
     <div>
       <ul>
-        {names.map((friend, index) => {
+        {names.map((friend, index) => 
           <li key={index}>{friend}</li>
-        })}
+        )}
       </ul>
     </div>
   );
@@ -93,46 +93,44 @@ function Friends(props) {
 function Posts( { posts } ) {
   const match = useRouteMatch();
 
-  const findPostByID = (id) => {
-    posts.filter((post) => {
-      return post.id == id;
-    });
-  }
+  const findPostById = (id) =>
+    posts.filter((post) => post.id == id)[0];
 
   return(
-    <div>
+    <React.Fragment>
       <h2>Posts</h2>
 
-        {posts.map((post, index) => {
-          return(
-            <Alert key={index} variant='primary'>
-              <Link to={`${match.url}/${post.id}`}>
-                {post.title}
-              </Link>
-            </Alert>
-          )
+      {posts.map((post, index) => {
+        return(
+          <Alert key={index} variant='primary'>
+            <Link to={`${match.url}/${post.id}`}>
+              {post.title}
+            </Link>
+          </Alert>
+        );
+      })}
 
       <Switch>
-      {/* path parameter /:postID */}
         <Route
-        path={`${match.path}/:postID`}
-        render={(props) => (
-          <Post 
-            {...props}
-            data={findPostByID(props.match.params.postID)}
-          />
-        )} /> 
+          path={`${match.path}/:postId`}
+          render={(props) => (
+            <Post 
+              {...props}
+              data={findPostById(props.match.params.postId)}
+            />
+          )}
+        /> 
         <Route path={match.path}>
           <h3>Please Select a post.</h3>
         </Route>
       </Switch>
-    </div>
-  )
+    </React.Fragment>
+  );
 }
 
 function Post(props) {
   const { data } = props;
-  return data == undefined ? <h1>404 post not found!</h1> : (
+  return (
     <Card>
       <Card.Header>{data.title}</Card.Header>
       <Card.Body>
