@@ -1,142 +1,145 @@
 // import logo from './logo.svg';
 import './App.css';
-
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Alert from 'react-bootstrap/Alert';
-import Card from 'react-bootstrap/Card';
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+// Bootstrap
 import Container from 'react-bootstrap/Container';
-import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// Nav
+import Navigation from './Components/Macro/Navigation';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch
-} from 'react-router-dom'
+// Page Imports
+import Home from './Pages/Home';
+import Roster from './Pages/Roster';
+import RosterShow from './Pages/RosterShow';
+import RosterForm from './Pages/RosterForm';
+import RosterEdit from './Pages/RosterEdit';
+import About from './Pages/About';
 
-export default function App() {
-  const posts = [
-    {
-      id: 1,
-      title: 'Post Title',
-      date: '1-3-2021',
-      content: 'First Post!'
-    },
-    {
-      id: 2,
-      title: 'Next Post',
-      date: '1-3-2021',
-      content: 'Next Post!'
-    },
-    {
-      id: 3,
-      title: 'Third Title',
-      date: '1-3-2021',
-      content: 'Third Post!'
-    },
-  ];
+import DB from './db';
 
-  return (
-    <Container>
-      <Router>
-        <div>
-          <ButtonGroup>
-            <Button variant="outline-secondary">
-              <Link to='/'>Home</Link>
-            </Button>
-            <Button variant="outline-secondary">
-              <Link to='/friends'>Friends</Link>
-            </Button>
-            <Button variant="outline-secondary">
-              <Link to='/posts'>Posts</Link>
-            </Button>
-          </ButtonGroup>
+// UUID Generation
+// import { v4 as uuid } from "uuid";
 
-          <Switch>
-            <Route path='/posts'>
-              <Posts posts={posts} />
-            </Route>
-            <Route path='/friends'>
-              <Friends names={['User 1', 'User 2', 'User 3']} />
-            </Route>
-            <Route path='/'>
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </Container>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    let db = new DB('dev_site');
+
+    this.state = {
+      db,
+      users: [],
+      articles: [],
+      loading: true
+    };
+  }
+
+  async componentDidMount() {
+    const users = await this.state.db.getAllRosterEntries();
+
+    this.setState({
+      users,
+      loading: false
+    });
+  }
+
+  // articles,
+
+  async handleSave(user, method) {
+    let result = await this.state.db[method](user);
+
+    let { users } = this.state;
+
+    user._id = result.id;
+    user._rev = result.rev;
+
+    this.setState({
+      users: { ...users, [result.id]: user }
+    });
+
+    return result;
+  }
+
+  async handleDelete(id) {
+    let { users } = this.state;
+    let user = users[id];
+
+    if (users[id] && window.confirm(`Are you sure you want to delete this user?`)) {
+      await this.state.db.deleteRosterEntry(user);
+
+      delete users[id];
+
+      this.setState({ users });
+    }
+  }
+
+  renderContent() {
+    if (this.state.loading) {
+      return(
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      )
+    }
+
+    console.log(this.state.users);
+
+    return(
+      <React.Fragment>
+        <Route exact path='/home' component={(props) => (
+          <Home {...props} news={this.state.articles} />
+        )} />
+        <Route exact path='/roster' component={(props) => <Roster {...props} users={this.state.users} /> } />
+        <Route exact path='/roster/:id' component={(props) => (
+          <RosterShow {...props} user={this.state.users[props.match.params.id]} onDelete={id => this.handleDelete(id) } />
+        )} />
+        <Route exact path='/roster/:id/edit' component={(props) => (
+          <RosterEdit {...props} user={this.state.users[props.match.params.id]} onSave={user => this.handleSave(user, 'updateRosterEntry') } />
+        )} />
+        <Route exact path='/rosterform' component={(props) =>(
+          <RosterForm {...props} onSave={user => this.handleSave(user, `createRosterEntry`)} />
+        )} /> 
+        <Route path='/about' component={About} />
+      </React.Fragment>
+    );
+  }
+
+  render() {
+    return (
+      <Container>
+        <BrowserRouter>
+          <div>
+            <Navigation />
+            { this.renderContent() }
+          </div>
+        </BrowserRouter>
+      </Container>
+    );
+  }
 }
 
-function Home() {
-  return <h2>Home</h2>
-}
+export default App;
 
-function Friends(props) {
-  const { names } = props;
 
-  return(
-    <div>
-      <ul>
-        {names.map((friend, index) => 
-          <li key={index}>{friend}</li>
-        )}
-      </ul>
-    </div>
-  );
-}
-
-function Posts( { posts } ) {
-  const match = useRouteMatch();
-
-  const findPostById = (id) =>
-    posts.filter((post) => post.id == id)[0];
-
-  return(
-    <React.Fragment>
-      <h2>Posts</h2>
-
-      {posts.map((post, index) => {
-        return(
-          <Alert key={index} variant='primary'>
-            <Link to={`${match.url}/${post.id}`}>
-              {post.title}
-            </Link>
-          </Alert>
-        );
-      })}
-
-      <Switch>
-        <Route
-          path={`${match.path}/:postId`}
-          render={(props) => (
-            <Post 
-              {...props}
-              data={findPostById(props.match.params.postId)}
-            />
-          )}
-        /> 
-        <Route path={match.path}>
-          <h3>Please Select a post.</h3>
-        </Route>
-      </Switch>
-    </React.Fragment>
-  );
-}
-
-function Post(props) {
-  const { data } = props;
-  return (
-    <Card>
-      <Card.Header>{data.title}</Card.Header>
-      <Card.Body>
-        <Card.Subtitle>{data.date}</Card.Subtitle>
-        <Card.Text>{data.content}</Card.Text>
-      </Card.Body>
-    </Card>
-  )
-}
+// state = {
+//   users: {
+//     1: {
+//       _id: '1',
+//       username: "Test",
+//       role: "Tester",
+//       desc: "Test User",
+//       updatedAt: new Date()
+//     }
+//   },
+//   articles: {
+//     1: {
+//       _id: '1',
+//       title: 'Title Test',
+//       text: 'Example Text!',
+//       author: 'Nobody',
+//       updatedAt: new Date()
+//     }
+//   }
+// }
