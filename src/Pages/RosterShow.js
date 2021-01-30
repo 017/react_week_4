@@ -12,7 +12,7 @@ import LinkedIn from '../Components/ContactInfo/LinkedIn';
 import Steam from '../Components/ContactInfo/Steam';
 import YouTube from '../Components/ContactInfo/YouTube';
 
-import RenderSocial from '../Components/Macro/Util';
+import RenderSocial from '../Components/Util';
 
 class RosterShow extends React.PureComponent {
 

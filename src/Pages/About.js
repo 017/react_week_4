@@ -1,12 +1,11 @@
 import React from 'react';
 
-import ContactList from '../Components/Macro/ContactList';
+import ContactList from '../Components/ContactList';
 
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
 
 function About() {
   return(

@@ -1,16 +1,14 @@
-// import logo from './logo.svg';
-import './App.css';
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 // Bootstrap
-import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 // Nav
-import Navigation from './Components/Macro/Navigation';
+import Navigation from './Components/Navigation';
 
 // Page Imports
-import Home from './Pages/Home';
 import Roster from './Pages/Roster';
 import RosterShow from './Pages/RosterShow';
 import RosterForm from './Pages/RosterForm';
@@ -19,14 +17,13 @@ import About from './Pages/About';
 
 import DB from './db';
 
-// UUID Generation
-// import { v4 as uuid } from "uuid";
-
+// import logo from './logo.svg';
+import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
 
-    let db = new DB('dev_site');
+    let db = new DB();
 
     this.state = {
       db,
@@ -84,13 +81,9 @@ class App extends Component {
       )
     }
 
-    console.log(this.state.users);
-
     return(
       <React.Fragment>
-        <Route exact path='/home' component={(props) => (
-          <Home {...props} news={this.state.articles} />
-        )} />
+        <Route exact path='/' component={(props) => <Roster {...props} users={this.state.users} /> } />
         <Route exact path='/roster' component={(props) => <Roster {...props} users={this.state.users} /> } />
         <Route exact path='/roster/:id' component={(props) => (
           <RosterShow {...props} user={this.state.users[props.match.params.id]} onDelete={id => this.handleDelete(id) } />
@@ -108,20 +101,23 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
-        <BrowserRouter>
-          <div>
-            <Navigation />
-            { this.renderContent() }
-          </div>
-        </BrowserRouter>
-      </Container>
+      <Router>
+        <div>
+          <Navigation />
+          { this.renderContent() }
+        </div>
+      </Router>
     );
   }
 }
 
 export default App;
 
+
+
+// <Route exact path='/home' component={(props) => (
+//   <Home {...props} news={this.state.articles} />
+// )} />
 
 // state = {
 //   users: {

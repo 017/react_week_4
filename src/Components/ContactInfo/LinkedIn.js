@@ -5,7 +5,7 @@ import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 function LinkedIn(url) {
   return(
     <React.Fragment>
-      <a target="_blank" href={url}><FontAwesomeIcon icon={faLinkedin} /> LinkedIn</a>
+      <a target="_blank" rel="noreferrer" href={url}><FontAwesomeIcon icon={faLinkedin} /> LinkedIn</a>
     </React.Fragment>
   );
 }

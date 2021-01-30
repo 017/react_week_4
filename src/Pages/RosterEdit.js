@@ -9,7 +9,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Link } from "react-router-dom";
 
 // using class based code for ease of state access, otherwise always using function-based code for simplicity
-export default class RosterEdit extends React.PureComponent {
+class RosterEdit extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -34,7 +34,7 @@ export default class RosterEdit extends React.PureComponent {
     this.setState({ user: { ...this.props.user } });
   }
 
-  async handleRosterSave() {
+  async handleSave() {
     this.setState({ saving: true });
 
     const result = await this.props.onSave({ ...this.state.user });
@@ -58,6 +58,7 @@ export default class RosterEdit extends React.PureComponent {
     }
 
     const { user } = this.state;
+
     return(
       <Form onSubmit={(e) => { e.preventDefault(); this.handleSave(); }} className="m-2 p-2 rounded bg-dark text-white">
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
@@ -108,3 +109,5 @@ export default class RosterEdit extends React.PureComponent {
     );
   }
 }
+
+export default RosterEdit;

@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import RosterList from '../Components/Macro/RosterList';
 
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
 
-import history from '../history';
-
+import RosterList from '../Components/RosterList';
 
 class Roster extends React.PureComponent {
   constructor(props) {
@@ -31,7 +28,7 @@ class Roster extends React.PureComponent {
             <p>
               There are currently no entries in the roster list. Please add some.
             </p>
-            <Button className="text-white btn-primary m-2 mx-auto"><Link to='/rosterform'>New Entry</Link></Button>
+            <Link to='/rosterform' className="btn m-2 mx-auto">New Entry</Link>
           </Container>
         </Jumbotron>
       );
@@ -39,10 +36,10 @@ class Roster extends React.PureComponent {
     
     return(
       <React.Fragment>
-        <Container classname="d-flex justify-content-end">
-          <Button className="text-white btn-primary m-2 mx-auto"><Link to='/rosterform'>New Entry</Link></Button>
+        <Container className="d-flex justify-content-end">
+            <Link to='/rosterform' className="btn-primary rounded text-white m-2 p-2 mx-auto">New Entry</Link>
         </Container>
-        <ListGroup className="m-2 p-2 rounded bg-dark text-white">
+        <ListGroup className="m-2 p-2 rounded text-white">
           <RosterList users={this.state.users} />
         </ListGroup>
       </React.Fragment>
@@ -51,6 +48,3 @@ class Roster extends React.PureComponent {
 }
 
 export default Roster;
-
-{/* <ListGroup className="m-2 p-2 float-right rounded bg-dark text-white">
-</ListGroup> */}

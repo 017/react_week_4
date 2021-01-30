@@ -35,13 +35,13 @@ class RosterForm extends React.PureComponent {
   }
 
   updateValue(e) {
-    const { ...user } = this.state;
+    const { user } = this.state;
 
     this.setState({ user: { ...user, [e.target.name]: e.target.value }});
   }
 
   render() {
-    const { ...user } = this.state;
+    const { user } = this.state;
 
     return(
       <React.Fragment>
@@ -49,34 +49,34 @@ class RosterForm extends React.PureComponent {
         <Form className="m-2 p-2 rounded bg-dark text-white" onSubmit={(e) => { e.preventDefault(); this.handleSave(); }}>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Username</Form.Label>
-            <Form.Control value={user.name} type="text" placeholder='Placeholder' onChange={e => this.updateValue(e)} required />
+            <Form.Control name="name" value={user.name} type="text" placeholder='Placeholder' required onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Avatar URL</Form.Label>
-            <Form.Control value={user.avatarURL} type="text" placeholder='Enter a URL to an image' onChange={e => this.updateValue(e)} required />
+            <Form.Control name="avatarURL" value={user.avatarURL} type="text" placeholder='Enter a URL to an image' required onChange={(e) => this.updateValue(e)} />
             <Form.Control.Feedback type="invalid">
               Please provide a valid URL for the avatar.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>LinkedIn URL</Form.Label>
-            <Form.Control value={user.linkedinURL} type="text" placeholder='linkedin profile URL' onChange={e => this.updateValue(e)} />
+            <Form.Control name="linkedinURL" value={user.linkedinURL} type="text" placeholder='linkedin profile URL' onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Github URL</Form.Label>
-            <Form.Control value={user.githubURL} type="text" placeholder='github profile URL' onChange={e => this.updateValue(e)} />
+            <Form.Control name="githubURL" value={user.githubURL} type="text" placeholder='github profile URL' onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Youtube URL</Form.Label>
-            <Form.Control value={user.youtubeURL} type="text" placeholder='youtube profile URL' onChange={e => this.updateValue(e)} />
+            <Form.Control name="youtubeURL" value={user.youtubeURL} type="text" placeholder='youtube profile URL' onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Steam URL</Form.Label>
-            <Form.Control value={user.steamURL} type="text" placeholder='steam community profile URL' onChange={e => this.updateValue(e)} />
+            <Form.Control name="steamURL" value={user.steamURL} type="text" placeholder='steam community profile URL' onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Role</Form.Label>
-            <Form.Control value={user.role} as='select' defaultValue="Choose..." onChange={e => this.updateValue(e)} required>
+            <Form.Control name="role" value={user.role} as='select' defaultValue="Choose..." required onChange={(e) => this.updateValue(e)}>
               <option>Choose...</option>
               <option>Tester</option>
               <option>Voice Actor</option>
@@ -87,7 +87,7 @@ class RosterForm extends React.PureComponent {
           </Form.Group>
           <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
             <Form.Label>Description</Form.Label>
-            <Form.Control value={user.desc} as='textarea' defaultValue="Describe the user." rows={3} onChange={e => this.updateValue(e)} />
+            <Form.Control name="desc" value={user.desc} as='textarea' defaultValue="Describe the user." rows={3} onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Button type="submit">Submit form</Button>
           <Link to="/roster" className="btn btn-danger ml-2">Cancel</Link>

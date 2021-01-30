@@ -5,7 +5,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 function LinkedIn(url) {  
   return(
     <React.Fragment>
-      <a target="_blank" href={url}><FontAwesomeIcon icon={faGithub} /> Github</a>
+      <a target="_blank" rel="noreferrer" href={url}><FontAwesomeIcon icon={faGithub} /> Github</a>
     </React.Fragment>
   );
 }

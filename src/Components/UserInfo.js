@@ -4,10 +4,10 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 
-import GitHub from '../ContactInfo/GitHub';
-import LinkedIn from '../ContactInfo/LinkedIn';
-import Steam from '../ContactInfo/Steam';
-import YouTube from '../ContactInfo/YouTube';
+import GitHub from './ContactInfo/GitHub';
+import LinkedIn from './ContactInfo/LinkedIn';
+import Steam from './ContactInfo/Steam';
+import YouTube from './ContactInfo/YouTube';
 
 
 //import '.../App.css';

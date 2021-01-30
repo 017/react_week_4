@@ -2,7 +2,7 @@ import PouchDB from 'pouchdb';
 
 export default class DB {
   constructor(name) {
-    this.db = new PouchDB('roster-appDB');
+    this.db = new PouchDB('roster-app');
   }
 
   async getAllRosterEntries() {
