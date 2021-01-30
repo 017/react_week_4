@@ -37,7 +37,7 @@ const User = ({ user: { _id, name, avatarURL, role, linkedinURL, githubURL, yout
         <ul className="list-group list-group-horizontal">
           <Col className="float-left list-group-item bg-dark font-weight-bold">
             <Image src={ avatarURL } rounded height="30em" width="30em" className="avatar" />
-            <Link className="font-weight-bold ml-2 text-truncate" to={`/Roster/${_id}`}>{ name }</Link>
+            <span><Link className="font-weight-bold ml-2" to={`/roster/${_id}`}> { name } </Link></span>
           </Col>
         </ul>
       </Col>

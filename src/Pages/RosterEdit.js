@@ -43,7 +43,7 @@ class RosterEdit extends React.PureComponent {
   }
 
   updateValue = (e) => {
-    let {user} = this.state;
+    let { user } = this.state;
 
     this.setState( { user: { ...user, [e.target.name]: e.target.value } } );
   }
@@ -63,34 +63,34 @@ class RosterEdit extends React.PureComponent {
       <Form onSubmit={(e) => { e.preventDefault(); this.handleSave(); }} className="m-2 p-2 rounded bg-dark text-white">
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Username</Form.Label>
-          <Form.Control value={user.name} type="text" placeholder='Placeholder' onChange={(e) => this.updateValue(e)} required />
+          <Form.Control value={user.name} name="name" type="text" placeholder='Placeholder' onChange={(e) => this.updateValue(e)} required />
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Avatar URL</Form.Label>
-          <Form.Control value={user.avatarURL} type="text" placeholder='Enter a URL to an image' onChange={(e) => this.updateValue(e)} required />
+          <Form.Control value={user.avatarURL} name="avatarURL" type="text" placeholder='Enter a URL to an image' onChange={(e) => this.updateValue(e)} required />
           <Form.Control.Feedback type="invalid">
             Please provide a valid URL for the avatar.
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>LinkedIn URL</Form.Label>
-          <Form.Control value={user.linkedinURL} type="text" placeholder='linkedin profile URL' onChange={(e) => this.updateValue(e)} />
+          <Form.Control value={user.linkedinURL} name="linkedinURL" type="text" placeholder='linkedin profile URL' onChange={(e) => this.updateValue(e)} />
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Github URL</Form.Label>
-          <Form.Control value={user.githubURL} type="text" placeholder='github profile URL' onChange={(e) => this.updateValue(e)} />
+          <Form.Control value={user.githubURL} name="githubURL" type="text" placeholder='github profile URL' onChange={(e) => this.updateValue(e)} />
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Youtube URL</Form.Label>
-          <Form.Control value={user.youtubeURL} type="text" placeholder='youtube profile URL' onChange={(e) => this.updateValue(e)} />
+          <Form.Control value={user.youtubeURL} name="youtubeURL" type="text" placeholder='youtube profile URL' onChange={(e) => this.updateValue(e)} />
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Steam URL</Form.Label>
-          <Form.Control value={user.steamURL} type="text" placeholder='steam community profile URL' onChange={(e) => this.updateValue(e)} />
+          <Form.Control value={user.steamURL} name="steamURL" type="text" placeholder='steam community profile URL' onChange={(e) => this.updateValue(e)} />
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Role</Form.Label>
-          <Form.Control value={user.role} as='select' defaultValue="Choose..." onChange={(e) => this.updateValue(e)} required>
+          <Form.Control value={user.role} name="role" as='select' defaultValue="Choose..." onChange={(e) => this.updateValue(e)} required>
             <option>Choose...</option>
             <option>Tester</option>
             <option>Voice Actor</option>
@@ -101,9 +101,9 @@ class RosterEdit extends React.PureComponent {
         </Form.Group>
         <Form.Group className="m-2 p-2 rounded bg-secondary text-white">
           <Form.Label>Description</Form.Label>
-          <Form.Control value={user.desc} as='textarea' defaultValue="Describe the user." rows={3} onChange={(e) => this.updateValue(e)} />
+          <Form.Control value={user.desc} name="desc" as='textarea' defaultValue="Describe the user." rows={3} onChange={(e) => this.updateValue(e)} />
         </Form.Group>
-        <Button type="submit">Submit form</Button>
+        <Button type="submit" value="Save">Submit form</Button>
         <Link to={`/roster/${user._id}`} className="btn btn-danger ml-2">Cancel</Link>
       </Form>
     );

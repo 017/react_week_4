@@ -14,7 +14,7 @@ function UserInfo() {
     <Container>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="rounded-bottom" fluid>
         <Navbar.Brand>
-          <Link to='/roster'>
+          <Link to='/'>
             <FontAwesomeIcon className="fas fa-2x" icon={faAddressBook} />
           </Link>
         </Navbar.Brand>
@@ -27,7 +27,7 @@ function UserInfo() {
           </Nav>
           <Nav>
             <Nav.Link eventKey={2}>
-              <Link to='/rosterform' className="btn-primary text-white rounded p-2 m-2 mx-auto">New Entry</Link>
+              <Link to='/roster-form' className="btn-primary text-white rounded p-2 m-2 mx-auto">New Entry</Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

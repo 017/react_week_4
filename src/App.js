@@ -84,14 +84,13 @@ class App extends Component {
     return(
       <React.Fragment>
         <Route exact path='/' component={(props) => <Roster {...props} users={this.state.users} /> } />
-        <Route exact path='/roster' component={(props) => <Roster {...props} users={this.state.users} /> } />
         <Route exact path='/roster/:id' component={(props) => (
           <RosterShow {...props} user={this.state.users[props.match.params.id]} onDelete={id => this.handleDelete(id) } />
         )} />
         <Route exact path='/roster/:id/edit' component={(props) => (
           <RosterEdit {...props} user={this.state.users[props.match.params.id]} onSave={user => this.handleSave(user, 'updateRosterEntry') } />
         )} />
-        <Route exact path='/rosterform' component={(props) =>(
+        <Route exact path='/roster-form' component={(props) =>(
           <RosterForm {...props} onSave={user => this.handleSave(user, `createRosterEntry`)} />
         )} /> 
         <Route path='/about' component={About} />

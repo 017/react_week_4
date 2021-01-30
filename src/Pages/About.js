@@ -18,9 +18,9 @@ function About() {
           <Card className="mt-2 p-2 bg-dark text-white rounded">
             <Card.Img variant='top' src="http://http.cat/404/" />
             <Card.Body>
-              <Card.Title>Studio Name</Card.Title>
+              <Card.Title>Heading Title</Card.Title>
               <Card.Text>
-                Some studio text blurb about who we are and how cool we are
+                I like words
               </Card.Text>
             </Card.Body>
           </Card>

@@ -28,7 +28,8 @@ class Roster extends React.PureComponent {
             <p>
               There are currently no entries in the roster list. Please add some.
             </p>
-            <Link to='/rosterform' className="btn m-2 mx-auto">New Entry</Link>
+            <hr />
+            <p><Link to='/rosterform' className="btn m-2 mx-auto">New Entry</Link></p>
           </Container>
         </Jumbotron>
       );

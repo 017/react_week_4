@@ -8,6 +8,8 @@ export default function RenderSocial(url, Callback) {
   if (!url) {
     return null;
   }
+
+  console.log(url);
   
   return(
     <Col className="float-left list-group-item bg-dark">
