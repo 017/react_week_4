@@ -90,7 +90,7 @@ class RosterForm extends React.PureComponent {
             <Form.Control name="desc" value={user.desc} as='textarea' defaultValue="Describe the user." rows={3} onChange={(e) => this.updateValue(e)} />
           </Form.Group>
           <Button type="submit">Submit form</Button>
-          <Link to="/roster" className="btn btn-danger ml-2">Cancel</Link>
+          <Link to="/" className="btn btn-danger ml-2">Cancel</Link>
         </Form>
       </React.Fragment>
     );

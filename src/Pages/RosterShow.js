@@ -61,7 +61,7 @@ class RosterShow extends React.PureComponent {
         <Row>
           <Container className="m-4 p-2 rounded bg-dark text-white">
             <Col>{user.desc}</Col>
-            <Button className="btn-warning m-2"><Link to={`/notes/${user._id}/edit`}>Edit</Link></Button>
+            <Button className="btn-warning m-2"><Link to={`/roster/${user._id}/edit`}>Edit</Link></Button>
             <Button className="btn-danger m-2" onClick={ (e) => this.props.onDelete(user._id) }>Delete</Button>
           </Container>
         </Row>

@@ -29,7 +29,7 @@ class Roster extends React.PureComponent {
               There are currently no entries in the roster list. Please add some.
             </p>
             <hr />
-            <p><Link to='/rosterform' className="btn m-2 mx-auto">New Entry</Link></p>
+            <p><Link to='/roster-form' className="btn m-2 mx-auto">New Entry</Link></p>
           </Container>
         </Jumbotron>
       );
@@ -37,9 +37,6 @@ class Roster extends React.PureComponent {
     
     return(
       <React.Fragment>
-        <Container className="d-flex justify-content-end">
-            <Link to='/rosterform' className="btn-primary rounded text-white m-2 p-2 mx-auto">New Entry</Link>
-        </Container>
         <ListGroup className="m-2 p-2 rounded text-white">
           <RosterList users={this.state.users} />
         </ListGroup>
